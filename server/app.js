@@ -96,6 +96,7 @@ app.delete("/api/cohorts/:cohortId", (req, res) => {
 
 app.get("/api/students", (req, res) => {
   Student.find()
+    .populate("cohort")
     .then((allStudents) => {
       res.status(200).json(allStudents);
     })
@@ -107,6 +108,7 @@ app.get("/api/students", (req, res) => {
 app.get("/api/students/:studentId", (req, res) => {
   const { studentId } = req.params;
   Student.findById(studentId)
+    .populate("cohort")
     .then((student) => {
       res.status(200).json(student);
     })
@@ -120,6 +122,7 @@ app.get("/api/students/:studentId", (req, res) => {
 app.get("/api/students/cohort/:cohortId", (req, res) => {
   const { cohortId } = req.params;
   Student.find({ cohort:  cohortId  })
+    .populate("cohort")
     .then((studentList) => {
       res.status(200).json(studentList);
     })
