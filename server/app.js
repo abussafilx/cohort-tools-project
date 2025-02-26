@@ -7,6 +7,14 @@ const cors = require("cors")
 const cohorts = require("./cohorts.json")
 const students = require("./students.json")
 
+//Connect to MongoDB 
+const MONGODB_URI = "mongodb://127.0.0.1:27017/cohort-tools-api";
+
+mongoose
+  .connect(MONGODB_URI)
+  .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
+  .catch((err) => console.error("Error connecting to mongo", err));
+
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
