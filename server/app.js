@@ -85,7 +85,7 @@ app.put("/api/cohorts/:cohortId", (req, res) => {
 
 app.delete("/api/cohorts/:cohortId", (req, res) => {
   const { cohortId } = req.params;
-  Cohort.findById(cohortId)
+  Cohort.findByIdAndDelete(cohortId)
     .then(() => res.status(204).send())
     .catch((e) =>
       res.status(500).json({ message: "Error deleting the cohort" })
@@ -137,6 +137,7 @@ app.post("/api/students", (req, res) => {
   Student.create(req.body)
     .then((createdStudent) => res.status(201).json(createdStudent))
     .catch((e) => {
+      console.log(e)
       res.status(500).json({ message: "error creating student" });
     });
 });
@@ -154,7 +155,7 @@ app.put("/api/students/:studentId", (req, res) => {
 
 app.delete("/api/students/:studentId", (req, res) => {
   const { studentId } = req.params;
-  Cohort.findByIdAndDelete(studentId)
+  Student.findByIdAndDelete(studentId)
     .then(() => {
       res.status(204).send();
     })
