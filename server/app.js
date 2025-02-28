@@ -54,7 +54,7 @@ app.get("/docs", (req, res, next) => {
 
 // USER ROUTE
 
-app.get("/api/users/:id", isAuthenticated, ((req,res,next) => res.json({message: "test"})))
+app.get("/api/users/:id", isAuthenticated, ((req,res,next) => res.json(req.body)))
 
 
 // COHORT ROUTES
