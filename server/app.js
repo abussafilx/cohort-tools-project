@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -10,6 +11,8 @@ const mongoose = require("mongoose");
 const Cohort = require("./models/Cohort.model");
 const Student = require("./models/Student.model");
 const { errorHandler, notFoundHandler } = require("./middleware/error-handling");
+const { isAuthenticated } = require("./middleware/jwt.middleware");
+const routes = require("./routes/auth.routes")
 
 //Connect to MongoDB
 const MONGODB_URI = "mongodb://127.0.0.1:27017/cohort-tools-api";
@@ -39,9 +42,20 @@ app.use(cors());
 
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
 //
+
+// app.use(("/api", require("./routes")))
+
+app.use("/auth", require("./routes/auth.routes"))
+
 app.get("/docs", (req, res, next) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
+
+
+// USER ROUTE
+
+app.get("/api/users/:id", isAuthenticated, ((req,res,next) => res.json({message: "test"})))
+
 
 // COHORT ROUTES
 app.get("/api/cohorts", (req, res, next) => {
