@@ -10,6 +10,7 @@ const students = require("./students.json");
 const mongoose = require("mongoose");
 const Cohort = require("./models/Cohort.model");
 const Student = require("./models/Student.model");
+const User = require("./models/User.model.js")
 const { errorHandler, notFoundHandler } = require("./middleware/error-handling");
 const { isAuthenticated } = require("./middleware/jwt.middleware");
 const routes = require("./routes/auth.routes")
