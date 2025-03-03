@@ -55,7 +55,7 @@ app.get("/docs", (req, res, next) => {
 // USER ROUTE
 
 app.get("/api/users/:id", isAuthenticated, (req, res, next) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   User.findById(userId)
     .then((user) => {
       res.status(200).json(user);
